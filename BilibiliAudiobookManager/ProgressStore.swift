@@ -1,78 +1,63 @@
 import Foundation
 import Combine
 
-/// Owns the list of `BookProgress` records and persists them to `UserDefaults`
-/// as JSON. The in-memory list is the source of truth; a failed save/load is
-/// logged and never crashes the app.
+/// In-memory list of `BookProgress` entries with JSON persistence.
+///
+/// Conforms to `ObservableObject` so SwiftUI views refresh automatically via
+/// `@EnvironmentObject`. Entries are sorted most-recently-updated first.
 final class ProgressStore: ObservableObject {
-    /// Records sorted most-recently-updated first.
     @Published private(set) var books: [BookProgress] = []
 
     private let storageKey = "com.bilibili-audiobook-manager.bookProgress.v1"
     private let defaults: UserDefaults
 
-    init(defaults: UserDefaults = .standard) {
+    /// Uses the App Group container when available so the Share extension and
+    /// the main app see the same library; falls back to `.standard` otherwise.
+    init(defaults: UserDefaults = SharedStore.defaults) {
         self.defaults = defaults
-        load()
+        self.books = load()
     }
 
     // MARK: - Mutations
 
-    /// Adds a new record and re-sorts.
+    /// Adds a new entry and re-sorts by most recent update.
     func add(_ book: BookProgress) {
-        var newBook = book
-        newBook.lastUpdated = Date()
-        books.append(newBook)
-        sortAndSave()
+        books.append(book)
+        sortAndPersist()
     }
 
-    /// Replaces the record with the same `id`, stamps `lastUpdated`, and re-sorts.
-    /// Silently ignores unknown ids.
+    /// Replaces the entry with the same `id`. Unknown ids are ignored.
     func update(_ book: BookProgress) {
         guard let index = books.firstIndex(where: { $0.id == book.id }) else { return }
         var updated = book
         updated.lastUpdated = Date()
         books[index] = updated
-        sortAndSave()
+        sortAndPersist()
     }
 
-    /// Deletes records at the given list offsets (swipe-to-delete).
+    /// Deletes entries at the given offsets (used by `List.onDelete`).
     func delete(at offsets: IndexSet) {
         books.remove(atOffsets: offsets)
-        save()
-    }
-
-    /// Deletes a single record by identity.
-    func delete(_ book: BookProgress) {
-        books.removeAll { $0.id == book.id }
-        save()
+        persist()
     }
 
     // MARK: - Persistence
 
-    private func sortAndSave() {
+    private func sortAndPersist() {
         books.sort { $0.lastUpdated > $1.lastUpdated }
-        save()
+        persist()
     }
 
-    private func save() {
-        do {
-            let data = try JSONEncoder().encode(books)
-            defaults.set(data, forKey: storageKey)
-        } catch {
-            // Never crash on a persistence failure; the in-memory list stays valid.
-            print("[ProgressStore] Failed to encode books: \(error)")
-        }
+    private func persist() {
+        guard let data = try? JSONEncoder().encode(books) else { return }
+        defaults.set(data, forKey: storageKey)
     }
 
-    private func load() {
-        guard let data = defaults.data(forKey: storageKey) else { return } // first launch
-        do {
-            books = try JSONDecoder().decode([BookProgress].self, from: data)
-        } catch {
-            // Corrupted data: start fresh rather than crashing.
-            print("[ProgressStore] Failed to decode books, starting empty: \(error)")
-            books = []
+    private func load() -> [BookProgress] {
+        guard let data = defaults.data(forKey: storageKey),
+              let decoded = try? JSONDecoder().decode([BookProgress].self, from: data) else {
+            return []
         }
+        return decoded.sorted { $0.lastUpdated > $1.lastUpdated }
     }
 }
