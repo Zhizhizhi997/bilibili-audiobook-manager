@@ -47,4 +47,11 @@ enum BilibiliLauncher {
             UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
         }
     }
+
+    /// Records a play session (so the app can offer to advance the saved
+    /// progress when the user returns), then opens the book's saved position.
+    static func open(book: BookProgress) {
+        PlaySession.record(bookId: book.id)
+        open(bvId: book.bvId, page: book.page, seconds: book.seconds)
+    }
 }
