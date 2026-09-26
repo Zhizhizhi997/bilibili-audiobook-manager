@@ -1,10 +1,10 @@
 import SwiftUI
 
-/// Add / edit form for a `BookProgress` record.
+/// Add / edit form for a `BookProgress` entry.
 ///
-/// Validates all fields before calling `onSave`:
-/// - title and BV ID must be non-empty, BV ID must start with "BV"
-/// - page must be an integer ≥ 1, seconds an integer ≥ 0
+/// Shows inline validation errors (empty title, BV id not starting with "BV",
+/// page < 1, negative seconds). On save, passes the new or edited
+/// `BookProgress` to `onSave` and dismisses.
 struct BookFormView: View {
     @Environment(\.dismiss) private var dismiss
 
@@ -12,17 +12,16 @@ struct BookFormView: View {
     @State private var bvId: String
     @State private var pageText: String
     @State private var secondsText: String
-    @State private var errorMessage: String?
 
     private let bookToEdit: BookProgress?
     private let onSave: (BookProgress) -> Void
 
-    init(bookToEdit: BookProgress? = nil, onSave: @escaping (BookProgress) -> Void) {
+    init(bookToEdit: BookProgress? = nil, prefillBvId: String? = nil, onSave: @escaping (BookProgress) -> Void) {
         self.bookToEdit = bookToEdit
         self.onSave = onSave
-        // Pre-fill when editing; sensible defaults when adding.
+        // Pre-fill when editing; when adding, use the shared/clipboard BV id if provided.
         _title = State(initialValue: bookToEdit?.title ?? "")
-        _bvId = State(initialValue: bookToEdit?.bvId ?? "")
+        _bvId = State(initialValue: bookToEdit?.bvId ?? prefillBvId ?? "")
         _pageText = State(initialValue: bookToEdit.map { String($0.page) } ?? "1")
         _secondsText = State(initialValue: bookToEdit.map { String($0.seconds) } ?? "0")
     }
@@ -37,72 +36,85 @@ struct BookFormView: View {
                         .autocorrectionDisabled()
                 }
 
-                Section("Progress") {
-                    TextField("Page", text: $pageText)
+                Section("Position") {
+                    TextField("Page (default 1)", text: $pageText)
                         .keyboardType(.numberPad)
                     TextField("Seconds", text: $secondsText)
                         .keyboardType(.numberPad)
-                    Text("Tip: 90 seconds = 1:30. Page defaults to 1.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
                 }
 
-                if let errorMessage {
+                if let error = validationError {
                     Section {
-                        Text(errorMessage)
+                        Text(error)
                             .foregroundStyle(.red)
-                            .font(.callout)
+                            .font(.footnote)
                     }
                 }
             }
             .navigationTitle(bookToEdit == nil ? "Add Audiobook" : "Edit Audiobook")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") { save() }
+                        .disabled(validationError != nil)
                 }
             }
         }
     }
 
-    // MARK: - Validation & Save
+    // MARK: - Validation
+
+    /// Human-readable error, or `nil` when the form is valid.
+    private var validationError: String? {
+        if title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return "Please enter a title."
+        }
+        let id = bvId.trimmingCharacters(in: .whitespacesAndNewlines)
+        if id.isEmpty {
+            return "Please enter a BV ID."
+        }
+        if !id.hasPrefix("BV") {
+            return "BV ID must start with \"BV\"."
+        }
+        if let page = Int(pageText), page >= 1 {
+            // valid
+        } else {
+            return "Page must be a number ≥ 1."
+        }
+        if let seconds = Int(secondsText), seconds >= 0 {
+            // valid
+        } else {
+            return "Seconds must be a number ≥ 0."
+        }
+        return nil
+    }
+
+    // MARK: - Save
 
     private func save() {
+        guard validationError == nil else { return }
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedBvId = bvId.trimmingCharacters(in: .whitespacesAndNewlines)
+        let page = Int(pageText) ?? 1
+        let seconds = Int(secondsText) ?? 0
 
-        guard !trimmedTitle.isEmpty else {
-            errorMessage = "Please enter a title."
-            return
+        if let existing = bookToEdit {
+            var updated = existing
+            updated.title = trimmedTitle
+            updated.bvId = trimmedBvId
+            updated.page = max(page, 1)
+            updated.seconds = max(seconds, 0)
+            onSave(updated)
+        } else {
+            onSave(BookProgress(
+                title: trimmedTitle,
+                bvId: trimmedBvId,
+                page: max(page, 1),
+                seconds: max(seconds, 0)
+            ))
         }
-        guard !trimmedBvId.isEmpty else {
-            errorMessage = "Please enter a BV ID."
-            return
-        }
-        guard trimmedBvId.uppercased().hasPrefix("BV") else {
-            errorMessage = "BV ID should start with “BV” (e.g. BV1xx411c7mD)."
-            return
-        }
-        guard let page = Int(pageText.trimmingCharacters(in: .whitespaces)), page >= 1 else {
-            errorMessage = "Page must be a whole number of 1 or more."
-            return
-        }
-        guard let seconds = Int(secondsText.trimmingCharacters(in: .whitespaces)), seconds >= 0 else {
-            errorMessage = "Seconds must be a whole number of 0 or more."
-            return
-        }
-
-        // Reuse the existing record's id when editing so the list updates in place.
-        var draft = bookToEdit ?? BookProgress(title: "", bvId: "", seconds: 0)
-        draft.title = trimmedTitle
-        draft.bvId = trimmedBvId
-        draft.page = page
-        draft.seconds = seconds
-
-        onSave(draft)
         dismiss()
     }
 }
