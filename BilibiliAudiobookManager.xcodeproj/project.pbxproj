@@ -14,7 +14,36 @@
 		A1B2C3D4E5F60718293A4B25 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B15 /* ContentView.swift */; };
 		A1B2C3D4E5F60718293A4B26 /* BookFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B16 /* BookFormView.swift */; };
 		A1B2C3D4E5F60718293A4B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B18 /* Assets.xcassets */; };
+		A1B2C3D4E5F60718293A4B30 /* PlaySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B2E /* PlaySession.swift */; };
+		A1B2C3D4E5F60718293A4B31 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B2D /* SharedStore.swift */; };
+		A1B2C3D4E5F60718293A4B32 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B2D /* SharedStore.swift */; };
+		A1B2C3D4E5F60718293A4B33 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B28 /* ShareViewController.swift */; };
+		A1B2C3D4E5F60718293A4B34 /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B29 /* ShareExtension.appex */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1B2C3D4E5F60718293A4B40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B2C3D4E5F60718293A4B01 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D4E5F60718293A4B37;
+			remoteInfo = ShareExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A1B2C3D4E5F60718293A4B3E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A1B2C3D4E5F60718293A4B34 /* ShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A1B2C3D4E5F60718293A4B07 /* BilibiliAudiobookManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BilibiliAudiobookManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,10 +55,24 @@
 		A1B2C3D4E5F60718293A4B16 /* BookFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookFormView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B28 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B29 /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = wrapper.app-extension; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D4E5F60718293A4B2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B2B /* BilibiliAudiobookManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BilibiliAudiobookManager.entitlements; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B2C /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ShareExtension.entitlements; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B2D /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B2E /* PlaySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A1B2C3D4E5F60718293A4B09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D4E5F60718293A4B39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F60718293A4B03 /* BilibiliAudiobookManager */,
+				A1B2C3D4E5F60718293A4B35 /* ShareExtension */,
+				A1B2C3D4E5F60718293A4B36 /* Shared */,
 				A1B2C3D4E5F60718293A4B04 /* Products */,
 				A1B2C3D4E5F60718293A4B05 /* Frameworks */,
 			);
@@ -57,7 +102,9 @@
 				A1B2C3D4E5F60718293A4B14 /* BilibiliLauncher.swift */,
 				A1B2C3D4E5F60718293A4B15 /* ContentView.swift */,
 				A1B2C3D4E5F60718293A4B16 /* BookFormView.swift */,
+				A1B2C3D4E5F60718293A4B2E /* PlaySession.swift */,
 				A1B2C3D4E5F60718293A4B17 /* Info.plist */,
+				A1B2C3D4E5F60718293A4B2B /* BilibiliAudiobookManager.entitlements */,
 				A1B2C3D4E5F60718293A4B18 /* Assets.xcassets */,
 			);
 			path = BilibiliAudiobookManager;
@@ -67,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F60718293A4B07 /* BilibiliAudiobookManager.app */,
+				A1B2C3D4E5F60718293A4B29 /* ShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,6 +124,24 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A4B35 /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A4B28 /* ShareViewController.swift */,
+				A1B2C3D4E5F60718293A4B2A /* Info.plist */,
+				A1B2C3D4E5F60718293A4B2C /* ShareExtension.entitlements */,
+			);
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A4B36 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A4B2D /* SharedStore.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,15 +154,34 @@
 				A1B2C3D4E5F60718293A4B08 /* Sources */,
 				A1B2C3D4E5F60718293A4B09 /* Frameworks */,
 				A1B2C3D4E5F60718293A4B0A /* Resources */,
+				A1B2C3D4E5F60718293A4B3E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A1B2C3D4E5F60718293A4B3F /* PBXTargetDependency */,
 			);
 			name = BilibiliAudiobookManager;
 			productName = "$(TARGET_NAME)";
 			productReference = A1B2C3D4E5F60718293A4B07 /* BilibiliAudiobookManager.app */;
 			productType = "com.apple.product-type.application";
+		};
+		A1B2C3D4E5F60718293A4B37 /* ShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C3D4E5F60718293A4B3A /* Build configuration list for PBXNativeTarget "ShareExtension" */;
+			buildPhases = (
+				A1B2C3D4E5F60718293A4B38 /* Sources */,
+				A1B2C3D4E5F60718293A4B39 /* Frameworks */,
+				A1B2C3D4E5F60718293A4B3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareExtension;
+			productName = "$(TARGET_NAME)";
+			productReference = A1B2C3D4E5F60718293A4B29 /* ShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -109,6 +194,10 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					A1B2C3D4E5F60718293A4B06 /* BilibiliAudiobookManager */ = {
+						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
+					};
+					A1B2C3D4E5F60718293A4B37 /* ShareExtension */ = {
 						CreatedOnToolsVersion = 15.0;
 						LastSwiftMigration = 1500;
 					};
@@ -128,6 +217,7 @@
 			projectRoot = "";
 			targets = (
 				A1B2C3D4E5F60718293A4B06 /* BilibiliAudiobookManager */,
+				A1B2C3D4E5F60718293A4B37 /* ShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -138,6 +228,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B2C3D4E5F60718293A4B27 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D4E5F60718293A4B3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,10 +251,29 @@
 				A1B2C3D4E5F60718293A4B24 /* BilibiliLauncher.swift in Sources */,
 				A1B2C3D4E5F60718293A4B23 /* ProgressStore.swift in Sources */,
 				A1B2C3D4E5F60718293A4B22 /* BookProgress.swift in Sources */,
+				A1B2C3D4E5F60718293A4B30 /* PlaySession.swift in Sources */,
+				A1B2C3D4E5F60718293A4B31 /* SharedStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D4E5F60718293A4B38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D4E5F60718293A4B33 /* ShareViewController.swift in Sources */,
+				A1B2C3D4E5F60718293A4B32 /* SharedStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1B2C3D4E5F60718293A4B3F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1B2C3D4E5F60718293A4B37 /* ShareExtension */;
+			targetProxy = A1B2C3D4E5F60718293A4B40 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A1B2C3D4E5F60718293A4B0D /* Debug */ = {
@@ -165,8 +281,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BilibiliAudiobookManager/BilibiliAudiobookManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-			CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = BilibiliAudiobookManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -188,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BilibiliAudiobookManager/BilibiliAudiobookManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -220,7 +338,6 @@
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -247,7 +364,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					);
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -299,9 +416,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -311,6 +426,57 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A1B2C3D4E5F60718293A4B3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.BilibiliAudiobookManager.ShareExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1B2C3D4E5F60718293A4B3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.BilibiliAudiobookManager.ShareExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -331,6 +497,15 @@
 			buildConfigurations = (
 				A1B2C3D4E5F60718293A4B0F /* Debug */,
 				A1B2C3D4E5F60718293A4B10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1B2C3D4E5F60718293A4B3A /* Build configuration list for PBXNativeTarget "ShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3D4E5F60718293A4B3C /* Debug */,
+				A1B2C3D4E5F60718293A4B3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
